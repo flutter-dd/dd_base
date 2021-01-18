@@ -17,10 +17,8 @@ class Config {
   final String fuchsia;
   final String fuchsiaDev;
 
-  String get _dev => dev ?? base;
-
   Config(
-      {@required this.base,
+      {this.base = "",
         this.dev,
         this.ios,
         this.iosDev,
@@ -37,19 +35,19 @@ class Config {
 
   String get value {
     if (Platform.isIOS) {
-      return isProduct ? ios ?? base : iosDev ?? _dev;
+      return isProduct ? ios ?? base : iosDev ?? dev ?? ios ?? base;
     } else if (Platform.isAndroid) {
-      return isProduct ? android ?? base : androidDev ?? _dev;
+      return isProduct ? android ?? base : androidDev ?? dev ?? android ?? base;
     } else if (Platform.isLinux) {
-      return isProduct ? linux ?? base : linuxDev ?? _dev;
+      return isProduct ? linux ?? base : linuxDev ?? dev ?? linux ?? base;
     } else if (Platform.isMacOS) {
-      return isProduct ? mac ?? base : macDev ?? _dev;
+      return isProduct ? mac ?? base : macDev ?? dev ?? mac ?? base;
     } else if (Platform.isWindows) {
-      return isProduct ? win ?? base : winDev ?? _dev;
+      return isProduct ? win ?? base : winDev ?? dev ?? win ?? base;
     } else if (Platform.isFuchsia) {
-      return isProduct ? fuchsia ?? base : fuchsiaDev ?? _dev;
+      return isProduct ? fuchsia ?? base : fuchsiaDev ?? dev ?? fuchsia ?? base;
     } else {
-      return isProduct ? base : _dev;
+      return isProduct ? base : dev ?? base;
     }
   }
 }
