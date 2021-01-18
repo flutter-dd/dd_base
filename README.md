@@ -4,6 +4,8 @@ A new Flutter package.
 
 ## Getting Started
 
+## flutter packages pub publish
+
 This project is a starting point for a Dart
 [package](https://flutter.dev/developing-packages/),
 a library module containing code that can be shared easily across
