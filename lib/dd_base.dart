@@ -5,8 +5,14 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flustars/flustars.dart';
+import 'package:http/http.dart';
+import 'package:artemis/artemis.dart';
+import 'package:artemis/client.dart';
 
-part 'src/BasePage.dart';
+part 'src/base_page.dart';
 part 'src/dd_extension.dart';
 part 'src/dd_extension_ui.dart';
 part 'src/dd_config.dart';
+part 'src/dd_gql.dart';
+part 'src/user_default.dart';

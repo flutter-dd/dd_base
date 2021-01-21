@@ -1,6 +1,6 @@
 name: dd_base
 description: A Flutter package with dd_base, .
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/flutter-dd/dd_base
 
 environment:
@@ -10,4 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  artemis: '>=5.0.0 <6.0.0'
+  meta: '>=1.0.0 <2.0.0'
+  gql: '>=0.7.3 <1.0.0'
+  http: '>=0.0.1 <1.0.0'
+  flustars: '>=0.0.1 <1.0.0'
+
 
