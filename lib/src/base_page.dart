@@ -30,6 +30,18 @@ abstract class BaseState<T extends BaseStatefulPage> extends State<T>
     with RouteAware {
   bool _isInitaled = false;
   String get title => "${widget.runtimeType.toString()}";
+  bool get lockUpAndDown => false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (lockUpAndDown) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.portraitUp
+      ]);
+    }
+  }
 
   @override
   void didChangeDependencies() {
@@ -95,6 +107,12 @@ abstract class BaseState<T extends BaseStatefulPage> extends State<T>
   @override
   void dispose() {
     routeObserver.unsubscribe(this);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.dispose();
   }
 }

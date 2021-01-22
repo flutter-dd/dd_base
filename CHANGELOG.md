@@ -4,3 +4,4 @@
 ## [0.0.4] - fix_config.
 ## [0.0.5] - add_userDefault.
 ## [0.0.6] - extension_api.
+## [0.0.7] - lockScreenUpAndDown.
