@@ -31,6 +31,9 @@ abstract class BaseState<T extends BaseStatefulPage> extends State<T>
   bool _isInitaled = false;
   String get title => "${widget.runtimeType.toString()}";
   bool get lockUpAndDown => false;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+  set isLoading(bool v) => setState(() => _isLoading = v);
 
   @override
   void initState() {
@@ -59,8 +62,16 @@ abstract class BaseState<T extends BaseStatefulPage> extends State<T>
       child: CupertinoPageScaffold(
           resizeToAvoidBottomInset: !isVertical,
           navigationBar: isVertical ? null : appBar(),
-          child: SafeArea(child: content())),
+          child: Stack(fit: StackFit.expand,
+              children: [
+                SafeArea(child: content()),
+                loadingView(),
+              ])),
     );
+  }
+
+  Widget loadingView() {
+    return Container(color: Colors.transparent,);
   }
 
   CupertinoNavigationBar appBar() => CupertinoNavigationBar(

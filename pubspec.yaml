@@ -1,6 +1,6 @@
 name: dd_base
 description: A Flutter package with dd_base, .
-version: 0.0.9
+version: 0.0.10
 homepage: https://github.com/flutter-dd/dd_base
 
 environment:
