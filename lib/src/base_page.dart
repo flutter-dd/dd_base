@@ -71,7 +71,7 @@ abstract class BaseState<T extends BaseStatefulPage> extends State<T>
   }
 
   Widget loadingView() {
-    return Container(color: Colors.transparent,);
+    return Container();
   }
 
   CupertinoNavigationBar appBar() => CupertinoNavigationBar(
