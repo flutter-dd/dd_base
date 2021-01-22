@@ -29,4 +29,8 @@ extension API on ArtemisClient {
       throw e;
     }
   }
+
+  void logout() => UserDefault.token = '';
+  bool isLogin() => UserDefault.token != '';
+
 }
