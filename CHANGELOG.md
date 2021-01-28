@@ -9,3 +9,4 @@
 ## [0.0.9] - backTo0.07.
 ## [0.0.10] - add_loading_state.
 ## [0.0.11] - fix_bug.
+## [0.0.12] - navigatorBar_ back.

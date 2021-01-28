@@ -6,6 +6,9 @@ abstract class BaseStatelessPage extends StatelessWidget {
   const BaseStatelessPage({Key key}) : super(key: key);
 
   String get title => "${this.runtimeType.toString()}";
+  Widget get leading => Icon(CupertinoIcons.back);
+  Widget get middle => Text(title);
+  Widget get trailing => Container();
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +18,18 @@ abstract class BaseStatelessPage extends StatelessWidget {
     );
   }
 
-  CupertinoNavigationBar appBar(BuildContext context) =>
-      CupertinoNavigationBar(middle: Text(title));
+  CupertinoNavigationBar appBar(BuildContext context) => CupertinoNavigationBar(
+      border: Border.all(color: Color(0x00FFFFFF), width: 0),
+      leading: canPop(context)
+          ? GestureDetector(
+        child: leading,
+        onTap: Navigator.of(context).maybePop,
+      )
+          : Container(),
+      trailing: trailing,
+      middle: middle);
 
   Widget content(BuildContext context) => Container();
-
 }
 
 abstract class BaseStatefulPage extends StatefulWidget {
@@ -28,29 +38,27 @@ abstract class BaseStatefulPage extends StatefulWidget {
 
 abstract class BaseState<T extends BaseStatefulPage> extends State<T>
     with RouteAware {
-  bool _isInitaled = false;
+  bool _isInitial = false;
   String get title => "${widget.runtimeType.toString()}";
   bool get lockUpAndDown => false;
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
-  set isLoading(bool v) => setState(() => _isLoading = v);
+  Widget get leading => Icon(CupertinoIcons.back);
+  Widget get middle => Text(title);
+  Widget get trailing => Container();
 
   @override
   void initState() {
     super.initState();
     if (lockUpAndDown) {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitDown,
-        DeviceOrientation.portraitUp
-      ]);
+      SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
     }
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_isInitaled) return;
-    _isInitaled = true;
+    if (_isInitial) return;
+    _isInitial = true;
     routeObserver.subscribe(this, ModalRoute.of(context));
     onContextReady();
   }
@@ -62,22 +70,20 @@ abstract class BaseState<T extends BaseStatefulPage> extends State<T>
       child: CupertinoPageScaffold(
           resizeToAvoidBottomInset: !isVertical,
           navigationBar: isVertical ? null : appBar(),
-          child: Stack(fit: StackFit.expand,
-              children: [
-                SafeArea(child: content()),
-                loadingView(),
-              ])),
+          child: SafeArea(child: content())),
     );
   }
 
-  Widget loadingView() {
-    return Container();
-  }
-
   CupertinoNavigationBar appBar() => CupertinoNavigationBar(
-      previousPageTitle: "返回",
       border: Border.all(color: Color(0x00FFFFFF), width: 0),
-      middle: Text(title));
+      leading: canPop
+          ? GestureDetector(
+        child: leading,
+        onTap: Navigator.of(context).maybePop,
+      )
+          : Container(),
+      trailing: trailing,
+      middle: middle);
 
   Widget content() => Container();
 

@@ -19,6 +19,8 @@ extension StatelessWidgetDD on StatelessWidget {
   Map<String, WidgetBuilder> get route =>
       {'${runtimeType.toString()}': (context) => this};
 
+  bool canPop(BuildContext context) => ModalRoute.of(context)?.canPop ?? false;
+
   Future<T> push<T extends Object>(BuildContext context,
       {Object arguments}) async {
     return Navigator.of(context)
@@ -34,7 +36,6 @@ extension StatelessWidgetDD on StatelessWidget {
 
   Future<void> popRoot(BuildContext context) async {
     return Navigator.of(context).popUntil((route) {
-      print(route);
       return route.isFirst;
     });
   }
@@ -44,7 +45,6 @@ extension StatelessWidgetDD on StatelessWidget {
       return Navigator.of(context).pop();
     }
   }
-
 
 }
 
@@ -71,6 +71,7 @@ extension StatefulWidgetDD on StatefulWidget {
 extension StateDD on State {
   Object get arguments => ModalRoute.of(context).settings.arguments;
   bool get isVertical => MediaQuery.of(context).orientation.index == 1;
+  bool get canPop => ModalRoute.of(context)?.canPop ?? false;
 
   Future<void> popRoot() async {
     return Navigator.of(context).popUntil((route) {
