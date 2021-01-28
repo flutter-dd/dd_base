@@ -10,4 +10,4 @@
 ## [0.0.10] - add_loading_state.
 ## [0.0.11] - fix_bug.
 ## [0.0.12] - navigatorBar_ back.
-## [0.0.12] - fix_bug.
+## [0.0.13] - fix_bug.
